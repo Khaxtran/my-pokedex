@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Searchbar from "./Searchbar";
 
 export default function Navbar() {
   const [isActive, setIsActive] = useState();
@@ -15,14 +16,18 @@ export default function Navbar() {
       style={{ zIndex: "20" }}
     >
       <div className="navbar-brand">
-        <a className="navbar-item" href="https://bulma.io">
-          <img
-            src="https://bulma.io/images/bulma-logo.png"
-            width="112"
-            height="28"
-            alt="logo"
-          />
-        </a>
+        <div className="navbar-item">
+          <div
+            className="button is-success is-medium"
+            style={{
+              border: "3px solid black",
+              boxShadow: "3px 3px 0px black",
+              borderRadius: "5px",
+            }}
+          >
+            <strong>My Pokedex</strong>
+          </div>
+        </div>
 
         <div
           role="button"
@@ -44,9 +49,7 @@ export default function Navbar() {
         <div className="navbar-start pl-5"></div>
         <div className="navbar-end pr-5">
           <div className="navbar-item">
-            <div className="buttons">
-              <button className="button is-success is-medium" style={{border: "3px solid black", boxShadow: "3px 3px 0px black", borderRadius: "10px"}}><strong>Pokedex</strong></button>
-            </div>
+            <Searchbar />
           </div>
         </div>
       </div>
