@@ -9,7 +9,7 @@ export default function PokeCard({ name, url }) {
       className="card"
       style={{
         position: "relative",
-        maxWidth: "300px",
+        maxWidth: "250px",
         boxShadow: "5px 5px 0px black",
         border: "5px solid black",
         borderRadius: "20px",
@@ -32,7 +32,7 @@ export default function PokeCard({ name, url }) {
           left: "-5px",
           borderRadius: "10px 0px 10px 0px",
           border: "3px solid black",
-          boxShadow: "1px 1px 0px black",
+          boxShadow: "2px 3px 0px black",
         }}
       >
         <strong>#{pokemonId}</strong>

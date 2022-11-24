@@ -5,12 +5,12 @@ import PokeList from "./PokeList";
 export default function Dashboard() {
   return (
     <>
-    <section className="hero is-light is-medium">
+      <section className="hero is-light is-medium">
         <Header />
-    </section>
-    <section className="section is-medium">
-      <PokeList />
-    </section>
+      </section>
+      <section className="section is-medium">
+        <PokeList />
+      </section>
     </>
   );
 }
