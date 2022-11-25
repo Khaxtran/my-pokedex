@@ -2,7 +2,7 @@ import React from 'react'
 import Lottie from "react-lottie";
 import animationData from "./pokeball-loading-animation.json";
 
-export default function Pokeball() {
+export default function Pokeball({lottieWidth, lottieHeight}) {
     const defaultOptions = {
         loop: true,
         autoplay: true,
@@ -17,7 +17,7 @@ export default function Pokeball() {
       <Lottie
         options={defaultOptions}
         isClickToPauseDisabled={true}
-        style={{ width: "150px", height: "150px"}}
+        width = {lottieWidth} height = {lottieHeight}
       />
     </div>
   )

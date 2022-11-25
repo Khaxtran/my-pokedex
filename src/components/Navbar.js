@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Searchbar from "./Searchbar";
 
 export default function Navbar() {
   const [isActive, setIsActive] = useState();
@@ -48,9 +47,7 @@ export default function Navbar() {
       >
         <div className="navbar-start pl-5"></div>
         <div className="navbar-end pr-5">
-          <div className="navbar-item">
-            <Searchbar />
-          </div>
+          {/*Put something here later, like a logo or sumthin */}
         </div>
       </div>
     </nav>

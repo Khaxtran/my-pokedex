@@ -2,57 +2,56 @@ import React, { useState, useEffect, useRef } from "react";
 import PokeCard from "./PokeCard";
 import axios from "axios";
 import Pokeball from "../lotties/Pokeball";
-import "./PokeList.css";
 
 export default function PokeList() {
   let offset = 0;
-  const [isFetchingNextPage, setIsFetchingNextPage] = useState(true);
+  const [isFetchingNextPage, setIsFetchingNextPage] = useState();
   const loadMoreRef = useRef();
   const [pokedex, setPokedex] = useState([]);
-  //const pokecards = document.querySelectorAll(".pokecard");
 
   useEffect(() => {
-    loadMorePokemon()
-    window.addEventListener("scroll", handleScroll)
-  }, [])
+    loadMorePokemon();
+    handleScroll();
+  }, []);
 
   function loadMorePokemon() {
-    setIsFetchingNextPage(true);
+    setIsFetchingNextPage(true)
     axios
-      .get(`https://pokeapi.co/api/v2/pokemon/?limit=50&offset=${offset}`)
+      .get(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${offset}`)
       .then((response) => {
         setIsFetchingNextPage(false);
         setPokedex((prevPokemon) => [...prevPokemon, ...response.data.results]);
       });
-
-    offset += 50;
+    offset += 20;
   }
 
   function handleScroll() {
-    const bottom = loadMoreRef && loadMoreRef.current
+    const hasMoreContent = loadMoreRef && loadMoreRef.current;
+    const loadMoreContentObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => entry.isIntersecting && loadMorePokemon());
+      },
+      {
+        rootMargin: "50px",
+      }
+    );
 
-    const loadObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => entry.isIntersecting && loadMorePokemon())
-    }, {
-      threshold: 1
-    })
+    if (!hasMoreContent) return;
 
-    if(!bottom) return
-
-    loadObserver.observe(bottom)
+    loadMoreContentObserver.observe(hasMoreContent);
   }
-  
+
   return (
     <>
-      <div className="card-container is-flex is-flex-wrap-wrap is-flex-direction-row is-justify-content-center">
+      <div className="is-flex is-flex-wrap-wrap is-flex-direction-row is-justify-content-center">
         {pokedex &&
           pokedex.map((pokemon, i) => (
             <div key={i} className="m-2">
-              <PokeCard name={pokemon.name} url={pokemon.url} />
+              <PokeCard name={pokemon.name} url={pokemon.url} hqSprite="" />
             </div>
           ))}
       </div>
-      <div ref={loadMoreRef}>{isFetchingNextPage ? <Pokeball /> : ""}</div>
+      <div ref={loadMoreRef}>{isFetchingNextPage ? <Pokeball lottieWidth="150px" lottieHeight="150px"/> : ""}</div>
     </>
   );
 }
