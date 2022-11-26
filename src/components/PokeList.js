@@ -14,15 +14,20 @@ export default function PokeList() {
     handleScroll();
   }, []);
 
-  function loadMorePokemon() {
-    setIsFetchingNextPage(true)
-    axios
+  async function loadMorePokemon() {
+    setIsFetchingNextPage(true);
+
+    try {
+      await axios
       .get(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${offset}`)
-      .then((response) => {
+      .then((res) => {
         setIsFetchingNextPage(false);
-        setPokedex((prevPokemon) => [...prevPokemon, ...response.data.results]);
+        setPokedex((prevPokemon) => [...prevPokemon, ...res.data.results]);
       });
     offset += 20;
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   function handleScroll() {
@@ -51,7 +56,13 @@ export default function PokeList() {
             </div>
           ))}
       </div>
-      <div ref={loadMoreRef}>{isFetchingNextPage ? <Pokeball lottieWidth="150px" lottieHeight="150px"/> : ""}</div>
+      <div ref={loadMoreRef}>
+        {isFetchingNextPage ? (
+          <Pokeball lottieWidth="150px" lottieHeight="150px" />
+        ) : (
+          ""
+        )}
+      </div>
     </>
   );
 }

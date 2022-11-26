@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Pokeball from "../lotties/Pokeball";
 
-export default function PokeCard({ name, url, hqSprite }) {
+export default function PokeCard({ name, url, hqSprite, pokemonId }) {
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(true);
-  const pokemonId = url.split("/")[url.split("/").length - 2];
-  const pixelImageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`
-  const hqImageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
+  const convertId = url.split("/")[url.split("/").length - 2];
+  const pixelImageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${convertId || pokemonId}.png`
+  const hqImageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${convertId || pokemonId}.png`;
 
   useEffect(() => {
     handleImageLoad()
@@ -42,7 +41,7 @@ export default function PokeCard({ name, url, hqSprite }) {
       >
         {hqSprite !== "" ? (
           <figure className="image is-4by3">
-            <img className="p-5" src={hqSprite} alt="Placeholder" />
+            <img className="p-5" src={image} alt="Placeholder" />
           </figure>
         ) : (
           <>
@@ -59,7 +58,7 @@ export default function PokeCard({ name, url, hqSprite }) {
                 </div>
               </figure>
             ) : (
-              <figure className="image is-4by3">
+              <figure className="image is-square">
                 <img className="p-5" src={image} alt="Placeholder" />
               </figure>
             )}
@@ -78,7 +77,7 @@ export default function PokeCard({ name, url, hqSprite }) {
           boxShadow: "2px 3px 0px black",
         }}
       >
-        <strong>#{pokemonId}</strong>
+        <strong>#{convertId || pokemonId}</strong>
       </div>
 
       <div 
