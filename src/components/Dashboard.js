@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import PokeList from "./PokeList";
 import Pokeball from "../lotties/Pokeball";
-import PokeCard from "./PokeCard";
+import PokeCard from "./PokeCard/PokeCard";
 
 export default function Dashboard() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -24,7 +24,7 @@ export default function Dashboard() {
 
     if (searchTerm === "") {
       setIsLoading(false);
-      setHasError(true);
+      setHasError(true); 
       setErrorMessage("Nothing to find...")
       return
     } 
