@@ -6,6 +6,7 @@ import "./PokeCard.css";
 export default function PokeCard({ name, url, hqSprite, pokemonId }) {
   const [openModal, setOpenModal] = useState(false);
   const active = openModal ? "is-active" : "";
+  const pokemonName = name.charAt(0).toUpperCase() + name.slice(1);
 
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(true);
@@ -43,7 +44,14 @@ export default function PokeCard({ name, url, hqSprite, pokemonId }) {
   return (
     <>
       {openModal && (
-        <Pokemon show={openModal} active={active} onHide={closePokemonModal} />
+        <Pokemon
+          show={openModal}
+          active={active}
+          onHide={closePokemonModal}
+          pokemonName={pokemonName}
+          pokemonIndex={name}
+          pixelArt={pixelImageUrl}
+        />
       )}
 
       <div className="card pokecard m-3" onClick={openPokemonModal}>
@@ -81,16 +89,8 @@ export default function PokeCard({ name, url, hqSprite, pokemonId }) {
           <strong>#{convertId || pokemonId}</strong>
         </div>
 
-        <figure className="pixel-art image is-96x96">
-          <img src={pixelImageUrl} alt="pokemon-pixel-art" />
-        </figure>
-
-        <div>
-            <p className="title is-size-4">
-              {name.charAt(0).toUpperCase() + name.slice(1)}
-            </p>
-            <span>Fire</span>
-            <span>Posion</span>
+        <div className="p-2">
+          <p className="title is-size-4">{pokemonName}</p>
         </div>
       </div>
     </>
