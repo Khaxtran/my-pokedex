@@ -81,16 +81,44 @@ export default function Pokemon({
   }
 
   function progressBarColour(value, min, max) {
-    let percentage = (value/max)*100
+    let percentage = (value / max) * 100;
 
     if (percentage <= 30) {
-      return <progress className="progress is-small is-danger" value={value} min={min} max={max} />
+      return (
+        <progress
+          className="progress is-small is-danger"
+          value={value}
+          min={min}
+          max={max}
+        />
+      );
     } else if (percentage >= 30 && percentage <= 50) {
-      return <progress className="progress is-small is-warning" value={value} min={min} max={max} />
-    } else if (percentage >= 50 && percentage <= 100)  {
-      return <progress className="progress is-small is-success" value={value} min={min} max={max} />
+      return (
+        <progress
+          className="progress is-small is-warning"
+          value={value}
+          min={min}
+          max={max}
+        />
+      );
+    } else if (percentage >= 50 && percentage <= 100) {
+      return (
+        <progress
+          className="progress is-small is-success"
+          value={value}
+          min={min}
+          max={max}
+        />
+      );
     } else {
-      return <progress className="progress is-small is-info" value={value} min={min} max={max} />
+      return (
+        <progress
+          className="progress is-small is-info"
+          value={value}
+          min={min}
+          max={max}
+        />
+      );
     }
   }
 
@@ -138,60 +166,84 @@ export default function Pokemon({
             </div>
           </section>
 
-          <p>Weight: {weight} kg</p>
-          <p>Height: {height} meters</p>
+          <div className="pokemon-sub-info columns is-vcentered is-mobile">
+            <div className="column">
+              <p>Weight: {weight} kg</p>
+            </div>
+            <div className="column">
+              {abilities &&
+                abilities.map((ability, i) => (
+                  <div key={i}>{ability.ability.name}</div>
+                ))}
+            </div>
+            <div className="column">
+              <p>Height: {height} meters</p>
+            </div>
+          </div>
 
           <p>{description}</p>
 
-          {abilities &&
-            abilities.map((ability, i) => (
-              <div key={i}>{ability.ability.name}</div>
-            ))}
-
           <div className="pokemon-stats columns is-vcentered is-mobile my-2">
             <div className="column">
-              <div><small>Hp</small></div>
-              <div><small>Attack</small></div>
-              <div><small>Defense</small></div>
-              <div><small>Speed</small></div>
-              <div><small>Sp. Atk</small></div>
-              <div><small>Sp. Def</small></div>
-            </div>
-            
-            <div className="column stats-value has-text-right">
-            <div><small>{hp}</small></div>
-              <div><small>{attack}</small></div>
-              <div><small>{defense}</small></div>
-              <div><small>{speed}</small></div>
-              <div><small>{specialAttack}</small></div>
-              <div><small>{specialDefense}</small></div>
-            </div>
-            
-            <div className="column is-three-quarters p-0 mt-1 mr-2">
-              <div className="mb-3">
-                {progressBarColour(hp, "0", "255")}
+              <div>
+                <small>Hp</small>
               </div>
+              <div>
+                <small>Attack</small>
+              </div>
+              <div>
+                <small>Defense</small>
+              </div>
+              <div>
+                <small>Speed</small>
+              </div>
+              <div>
+                <small>Sp. Atk</small>
+              </div>
+              <div>
+                <small>Sp. Def</small>
+              </div>
+            </div>
+
+            <div className="column stats-value has-text-right">
+              <div>
+                <small>{hp}</small>
+              </div>
+              <div>
+                <small>{attack}</small>
+              </div>
+              <div>
+                <small>{defense}</small>
+              </div>
+              <div>
+                <small>{speed}</small>
+              </div>
+              <div>
+                <small>{specialAttack}</small>
+              </div>
+              <div>
+                <small>{specialDefense}</small>
+              </div>
+            </div>
+
+            <div className="column is-three-quarters p-0 mt-1 mr-2">
+              <div className="mb-3">{progressBarColour(hp, "0", "255")}</div>
 
               <div className="mb-3">
                 {progressBarColour(attack, "0", "190")}
               </div>
-              
+
               <div className="mb-3">
                 {progressBarColour(defense, "0", "230")}
               </div>
 
-              <div className="mb-3">
-                {progressBarColour(speed, "0", "180")}
-              </div>
-              
+              <div className="mb-3">{progressBarColour(speed, "0", "180")}</div>
+
               <div className="mb-3">
                 {progressBarColour(specialAttack, "0", "190")}
               </div>
-              
-              <div>
-                {progressBarColour(specialDefense, "0", "230")}
-              </div>
-              
+
+              <div>{progressBarColour(specialDefense, "0", "230")}</div>
             </div>
           </div>
         </section>
