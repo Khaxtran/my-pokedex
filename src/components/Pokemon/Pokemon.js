@@ -83,15 +83,15 @@ export default function Pokemon({
   function progressBarColour(value, min, max) {
     let percentage = (value/max)*100
 
-    if (percentage < 30) {
+    if (percentage <= 30) {
       return <progress className="progress is-small is-danger" value={value} min={min} max={max} />
-    } else if (percentage > 30 && percentage < 50) {
+    } else if (percentage >= 30 && percentage <= 50) {
       return <progress className="progress is-small is-warning" value={value} min={min} max={max} />
-    } else if (percentage > 50 && percentage < 100)  {
+    } else if (percentage >= 50 && percentage <= 100)  {
       return <progress className="progress is-small is-success" value={value} min={min} max={max} />
+    } else {
+      return <progress className="progress is-small is-info" value={value} min={min} max={max} />
     }
-
-    console.log(percentage)
   }
 
   return (
