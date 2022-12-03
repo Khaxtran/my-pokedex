@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./Pokemon.css";
 import axios from "axios";
 import { TYPE_COLOURS } from "./TypeColors";
+import { IoScaleOutline } from "react-icons/io5";
+import { AiOutlineColumnHeight } from "react-icons/ai";
+import { TbPokeball } from "react-icons/tb";
 
 export default function Pokemon({
   active,
@@ -140,48 +143,66 @@ export default function Pokemon({
 
         <section className="modal-card-body">
           <section className="body-top">
-            <div className="types-container">
-              {types &&
-                types.map((type, i) => (
-                  <div
-                    className="type m-1 p-1"
-                    style={{ backgroundColor: TYPE_COLOURS[type.type.name] }}
-                    key={i}
-                  >
-                    {type.type.name.charAt(0).toUpperCase() +
-                      type.type.name.slice(1)}
-                  </div>
-                ))}
-            </div>
-            <div className="pokemon-stand">
-              <figure className="pixel-art image is-128x128">
+            <div className="sprite-background">
+              <figure className="pixel-art">
                 <img
                   className="pokemon-sprite"
                   src={pixelArt}
                   alt="pokemon-pixel-art"
                 />
               </figure>
-              <div className="pokemon-shadow"></div>
-              <div className="stand-shadow"></div>
+              <figure className="pokeball image">
+                <img src="PokeBall.svg" alt="pokeball" />
+              </figure>
             </div>
           </section>
 
-          <div className="pokemon-sub-info columns is-vcentered is-mobile">
+          <hr className="solid"></hr>
+
+          <div className="columns pokemon-info-container has-text-centered is-mobile">
             <div className="column">
-              <p>Weight: {weight} kg</p>
+              <div className="row info-title">
+                <IoScaleOutline className="icon mx-1" />
+                <small>Weight</small>
+              </div>
+              <div className="row title is-size-4">{weight} kg</div>
             </div>
+
             <div className="column">
-              {abilities &&
-                abilities.map((ability, i) => (
-                  <div key={i}>{ability.ability.name}</div>
-                ))}
+              <div className="row info-title">
+                <TbPokeball className="icon mx-1" />
+                <small>Types</small>
+              </div>
+              <div className="row types-container">
+                {types &&
+                  types.map((type, i) => (
+                    <div
+                      className="type mx-1 px-1"
+                      style={{ backgroundColor: TYPE_COLOURS[type.type.name] }}
+                      key={i}
+                    >
+                      {type.type.name.charAt(0).toUpperCase() +
+                        type.type.name.slice(1)}
+                    </div>
+                  ))}
+              </div>
             </div>
+
             <div className="column">
-              <p>Height: {height} meters</p>
+              <div className="row info-title">
+                <AiOutlineColumnHeight className="icon mx-1" />
+                <small>Height</small>
+              </div>
+              <div className="row title is-size-4">{height} m</div>
             </div>
           </div>
 
-          <p>{description}</p>
+          <div className="notification">
+            <h1 className="title is-size-5-fullhd is-size-5-touch is-size-5-mobile mb-2">
+              About
+            </h1>
+            {description}
+          </div>
 
           <div className="pokemon-stats columns is-vcentered is-mobile my-2">
             <div className="column">
@@ -226,7 +247,7 @@ export default function Pokemon({
               </div>
             </div>
 
-            <div className="column is-three-quarters p-0 mt-1 mr-2">
+            <div className="column is-three-quarters p-0 mt-1 mr-4">
               <div className="mb-3">{progressBarColour(hp, "0", "255")}</div>
 
               <div className="mb-3">
@@ -245,6 +266,13 @@ export default function Pokemon({
 
               <div>{progressBarColour(specialDefense, "0", "230")}</div>
             </div>
+          </div>
+
+          <div>
+            {abilities &&
+              abilities.map((ability, i) => (
+                <div key={i}>{ability.ability.name}</div>
+              ))}
           </div>
         </section>
 
