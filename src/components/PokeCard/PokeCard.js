@@ -76,8 +76,8 @@ export default function PokeCard({ name, url, hqSprite, pokemonId }) {
                 </figure>
               ) : (
                 <>
-                  <figure className="image is-square">
-                    <img className="p-5" src={image} alt="Placeholder" />
+                  <figure className="image">
+                    <img className="p-4" src={image} alt="Placeholder" />
                   </figure>
                 </>
               )}
@@ -85,12 +85,12 @@ export default function PokeCard({ name, url, hqSprite, pokemonId }) {
           )}
         </div>
 
-        <div className="pokemon-id is-size-3 has-background-warning p-2">
+        <div className="pokemon-id is-size-2-fullhd is-size-2-desktop is-size-5-touch has-background-warning p-2">
           <strong>#{convertId || pokemonId}</strong>
         </div>
 
         <div className="p-2">
-          <p className="title is-size-4">{pokemonName}</p>
+          <p className="title is-size-4-fullhd is-size-6-touch">{pokemonName}</p>
         </div>
       </div>
     </>

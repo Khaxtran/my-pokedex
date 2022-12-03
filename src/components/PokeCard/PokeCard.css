@@ -31,3 +31,17 @@
     padding: 0;
     margin: 0;
 }
+
+@media only screen and (max-width: 992px) {
+  .pokecard {
+    width: 120px;
+    height: 220px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .pokecard {
+    width: 100px;
+    height: 200px;
+  }
+}
